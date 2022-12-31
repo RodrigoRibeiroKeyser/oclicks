@@ -4,11 +4,11 @@
 
 <p>Pacotes e framesworks</p>
 <br />
-<p>Laravel<p>
-<p>Inertia JS</p>
-<p>Ziggy</p>
-<p>Vuetify</p>
-<p>Vue 3</p>
-<p>V-calendar</p>
+<p>Laravel<br />
+Inertia JS<br />
+Ziggy<br />
+Vuetify<br />
+Vue 3<br />
+V-calendar</p>
 <br />
 <p>Rodrigo Ribeiro (Keyser)</p>
