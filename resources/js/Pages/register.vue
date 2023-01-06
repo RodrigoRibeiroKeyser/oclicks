@@ -76,15 +76,7 @@ let submit = () => {
 
 
 </script>
-<script>
-import layoutDashaboard from '../../Layout/layout-dashboard.vue'
 
-export default {
-
-    layout: layoutDashaboard
-
-}
-</script>
 <style>
 .v-messages__message {
     color: red

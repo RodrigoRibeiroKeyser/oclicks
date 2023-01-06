@@ -24,7 +24,9 @@ class UserController extends Controller
         'users'=>User::all()->map(fn($user)=>[
             'id' =>$user->id,
             'name' =>$user->name,
+            'login' =>$user->login,
             'email' =>$user->email,
+            'level' =>$user->level,
             'created_at_year'=>$user->created_at->format('d/m/Y'),
             'created_at_hours'=>$user->created_at->format('H:m'),
 
@@ -38,13 +40,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(UserRequest $request)
+    public function create()
     {   
-        
-       $data = $request->all();
+        return Inertia::render('Dashboard/users-register', ['titulo' => 'Registrar Usuários']);
        
-        User::create($data);
-        return redirect('dashboard');
     }
 
     /**
@@ -53,9 +52,16 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+
+        $data = $request->all();
+        array($data['level'] = 'user');
+        
+                
+        User::create($data);
+        return redirect('dashboard'); 
+
     }
 
     /**

@@ -27,6 +27,7 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required|min:8',
             'email' => 'required|email|unique:users',
+            'login' => 'required|min:8|unique:users',
             'password' => ['required', 'confirmed', Password::
             min(8)->letters()->mixedCase()->numbers()->symbols()],
 

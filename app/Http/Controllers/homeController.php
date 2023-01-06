@@ -16,7 +16,8 @@ class homeController extends Controller
   public function login(){
     return Inertia::render('login');
   }
-  public function formLogin(request $request){
-    dd($request);
+  public function create(){
+    return Inertia::render('register');
   }
+ 
 };

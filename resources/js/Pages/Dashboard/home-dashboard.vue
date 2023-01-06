@@ -38,7 +38,7 @@
 
 <script>
 import layoutDashaboard from '../../Layout/layout-dashboard.vue'
-import { Qalendar } from "qalendar";
+
 
 export default {
 
