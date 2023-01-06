@@ -13,7 +13,7 @@ class DashboardController extends Controller
       
     }
     public function userRegisterShow(){
-        return Inertia::render('Dashboard/users-register', ['titulo' => 'Registrar Usuários']);
+        
 
     }
 
