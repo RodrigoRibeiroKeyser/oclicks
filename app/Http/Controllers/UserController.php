@@ -56,8 +56,7 @@ class UserController extends Controller
     {
 
         $data = $request->all();
-        array($data['level'] = 'user');
-        
+        array($data['level'] = 'user');        
                 
         User::create($data);
         return redirect('dashboard'); 
