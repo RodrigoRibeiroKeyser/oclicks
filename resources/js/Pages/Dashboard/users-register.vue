@@ -44,7 +44,7 @@
 
 <script setup>
 
-import { useForm } from '@inertiajs/inertia-vue3';
+import { useForm, useRemember } from '@inertiajs/inertia-vue3';
 
 
 
@@ -52,6 +52,9 @@ let form = useForm({
     name: '',
     email: '',
     login: '',
+    plano: 'usuario',
+    tipo: '2',
+    created_by: '',
     password: '',
     password_confirmation: '',
 

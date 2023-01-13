@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -16,8 +18,10 @@ class homeController extends Controller
   public function login(){
     return Inertia::render('login');
   }
-  public function create(){
+  public function register(){
     return Inertia::render('register');
   }
+ 
+  
  
 };

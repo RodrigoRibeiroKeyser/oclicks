@@ -4,16 +4,16 @@
 
 
   <v-tabs v-model="tab" fixed-tabs>
-    <v-tab value="Admins">Admins</v-tab>
+    <v-tab value="CargoRH">Cargo RH</v-tab>
     <v-tab value="Colaboradores">Colaboradores</v-tab>
     <v-tab value="Supervisores">Supervisores</v-tab>
     <v-tab value="Coordenadores">Coordenadores</v-tab>
     <v-tab value="Gerentes">Gerentes</v-tab>
-    <v-tab value="Lojas">Lojas</v-tab>
+    <v-tab value="Clientes">Clientes</v-tab>
 
   </v-tabs>
   <v-window v-model="tab">
-    <v-window-item value="Admins">
+    <v-window-item value="CargoRH">
       <v-card class="mx-auto" variant="flat">
         <v-list lines="two">
           <v-list-item v-for="user in users" :key="user.id" :title="user.name" :subtitle="user.email">
@@ -123,7 +123,7 @@
     </v-window-item>
   </v-window>
   <v-window v-model="tab">
-    <v-window-item value="Lojas">
+    <v-window-item value="Clientes">
       <v-card class="mx-auto" variant="flat">
         <v-list lines="two">
           <v-list-item v-for="user in users" :key="user.id" :title="user.name" :subtitle="user.email">
@@ -165,7 +165,8 @@ defineProps({
   users: Object,
 
 
-})
+});
+
 
 
 </script>

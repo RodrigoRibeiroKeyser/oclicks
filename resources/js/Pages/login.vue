@@ -3,20 +3,20 @@
     <Head title="Portal do assinante"></Head>
 
     <div class="ww-100 bg-cortado">
-        <v-app>
+        <v-main>
 
             <v-row class=" bg-cortado">
                 <v-col class="d-flex justify-center align-center text-center ">
                     <v-col>
                         <v-card width="400" class="mx-auto pa-6" elevation="4" variant="flat">
                             <v-card-title>
-                                <h1 class="font-weight-light ma-6 " style="color: #6750A4; ">Login</h1>
+                                <h1 class="font-weight-light ma-6 text-primary">Login</h1>
                             </v-card-title>
 
                             <v-form @submit.prevent="submit">
 
                                 <v-card-text>
-                                    <v-text-field variant="outlined" color="primary" v-model="form.login" 
+                                    <v-text-field variant="outlined" color="primary" v-model="form.login"
                                         label="Usuário" prepend-inner-icon="mdi-account-outline" type="text">
                                     </v-text-field>
 
@@ -30,20 +30,24 @@
                                         </Link>
                                     </p>
                                 </v-card-text>
-                                <v-card-actions class="d-flex justify-space-around align-center flex-sm-row ">
+                                <v-card-actions
+                                    class="d-flex justify-space-around align-center flex-sm-row text-uppercase">
                                     <v-btn variant="flat" width="150" type="submit" :disabled="(form.processing)"
                                         :loading="loading">Entrar</v-btn>
-                                    <v-btn variant="flat" width="150" :href="route('register')">Cadastrar</v-btn>
-
+                                    <Link as="v-btn" :href="route('register')" type="submit">
+                                    <v-btn variant="flat" width="150">
+                                        Cadastrar
+                                    </v-btn>
+                                    </Link>
 
                                     <!-- erros-->
                                     <div class="text-center">
                                         <v-snackbar v-model="form.snackbar" variant="elevated" color="error">
-                                            <div  v-for="(error, i) in form.errors" :key="i">
-                                            {{ error }}
+                                            <div v-for="(error, i) in form.errors" :key="i">
+                                                {{ error }}
                                             </div>
-                                            
-                                             
+
+
                                             <template v-slot:actions>
                                                 <v-btn color="white" variant="text" @click="form.snackbar = false">
                                                     Fechar
@@ -67,7 +71,7 @@
 
 
 
-        </v-app>
+        </v-main>
 
     </div>
 </template>

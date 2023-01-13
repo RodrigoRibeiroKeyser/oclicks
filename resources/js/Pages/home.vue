@@ -1,7 +1,7 @@
 <template>
     <Head title="Seja simples"></Head>
 
-        <v-main >
+       <v-main>
           <v-container>
             <v-row wrap>
               <!--LOGO-->
@@ -191,7 +191,8 @@
 
 
     export default {
-        layout: LayoutHome,
+        
+      layout: LayoutHome,
       components: {
 
         Toggle

@@ -31,7 +31,7 @@ return [
         'array'   => 'O campo :attribute deve ter entre :min e :max itens.',
     ],
     'boolean'              => 'O campo :attribute deve ser verdadeiro ou falso.',
-    'confirmed'            => 'O campo :attribute de confirmação não confere.',
+    'confirmed'            => 'O campo confirmação de :attribute não confere.',
     'current_password'     => 'A senha está incorreta.',
     'date'                 => 'O campo :attribute não é uma data válida.',
     'date_equals'          => 'O campo :attribute deve ser uma data igual a :date.',
@@ -47,7 +47,7 @@ return [
     'email'                => 'O campo :attribute deve ser um endereço de e-mail válido.',
     'ends_with'            => 'O campo :attribute deve terminar com um dos seguintes: :values',
     'enum'                 => 'O :attribute selecionado é inválido.',
-    'exists'               => 'O campo :attribute selecionado é inválido.',
+    'exists'               => 'O campo :attribute selecionado é obrigatório.',
     'file'                 => 'O campo :attribute deve ser um arquivo.',
     'filled'               => 'O campo :attribute deve ter um valor.',
     'gt' => [

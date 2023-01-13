@@ -30,3 +30,10 @@ input[type=number] {
     appearance: textfield;
 
 }
+.v-messages__message {
+  color: red
+}
+
+.onerror {
+  color: red !important
+}

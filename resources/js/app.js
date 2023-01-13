@@ -108,4 +108,4 @@ let app = createInertiaApp({
 
 
 
-InertiaProgress.init({ color: '#6750A4'})
+InertiaProgress.init({ color: '#cf7672'})

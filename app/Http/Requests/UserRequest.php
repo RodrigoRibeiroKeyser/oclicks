@@ -28,6 +28,7 @@ class UserRequest extends FormRequest
             'name' => 'required|min:8',
             'email' => 'required|email|unique:users',
             'login' => 'required|min:8|unique:users',
+            'plano' => 'required',
             'password' => ['required', 'confirmed', Password::
             min(8)->letters()->mixedCase()->numbers()->symbols()],
 

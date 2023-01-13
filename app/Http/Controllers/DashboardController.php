@@ -2,20 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
-    public function homeDashboard(){
-       
-        return Inertia::render('Dashboard/home-dashboard',['titulo' => 'Controle de Ponto']);
+    /**
+     * Show the profile for a given user.
+     *
+     * @param  int  $id
+     * @return \Illuminate\View\View
+     */
+    public function homeDashboard(){      
       
+        return Inertia::render('Dashboard/home-dashboard',['titulo' => 'Controle de Ponto']);
+            
     }
-    public function userRegisterShow(){
-        
+    
+    public function profileEdit(){
+
+        return Inertia::render('Dashboard/profile-edit', ['titulo' => 'Editar Perfil']);
 
     }
-
-
 }

@@ -9,10 +9,11 @@
                 <h5 class="font-weight-light">Matricula: 00{{ id }}</h5>
 
                 <!--v chip-->
-
+                <Link as="v-chip" :href="route('ProfileEdit')" >
                 <v-chip prepend-icon="md:person" size="small" variant="plain">
                     Meu perfil
                 </v-chip>
+                </Link>
                 <Link as='v-btn' :href="route('logout')" method="post">
                 <v-chip prepend-icon="md:logout" size="small" variant="plain">
                     Sair
@@ -84,7 +85,7 @@ export default {
 
     data: () => ({
         items: [
-           
+
             { text: 'Controle de Ponto', icon: 'md:schedule', link: 'DashboardHome' },
             { text: "Relatório Financeiro", icon: "mdi-currency-usd", link: 'DashboardHome' },
             { text: 'Equipes', icon: 'md:groups', link: 'DashboardHome' },
