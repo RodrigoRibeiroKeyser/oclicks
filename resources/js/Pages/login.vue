@@ -32,13 +32,14 @@
                                 </v-card-text>
                                 <v-card-actions
                                     class="d-flex justify-space-around align-center flex-sm-row text-uppercase">
-                                    <v-btn variant="flat" width="150" type="submit" :disabled="(form.processing)"
-                                        :loading="loading">Entrar</v-btn>
                                     <Link as="v-btn" :href="route('register')" type="submit">
                                     <v-btn variant="flat" width="150">
                                         Cadastrar
                                     </v-btn>
                                     </Link>
+                                    <v-btn variant="flat" width="150" type="submit" :disabled="(form.processing)"
+                                        :loading="loading">Entrar</v-btn>
+                                    
 
                                     <!-- erros-->
                                     <div class="text-center">

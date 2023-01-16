@@ -23,7 +23,7 @@ class DashboardController extends Controller
     
     public function profileEdit(){
 
-        return Inertia::render('Dashboard/profile-edit', ['titulo' => 'Editar Perfil']);
+        return Inertia::render('Dashboard/profile-edit', ['titulo' => 'Perfil e Configurações']);
 
     }
 }
