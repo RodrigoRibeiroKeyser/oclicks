@@ -88,7 +88,7 @@ const vuetify = createVuetify({
 
 let app = createInertiaApp({
 	progress: {
-		color: '#29d',
+		color: 'red',
 		includeCSS: true,
 		showSpinner: false,
 
