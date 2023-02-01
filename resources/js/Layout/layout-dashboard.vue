@@ -51,10 +51,6 @@
             </v-main>
         </v-app>
 
-
-
-
-
     </v-layout>
 
 
@@ -63,29 +59,13 @@
 
 import  Nav  from '../Shared/nav.vue'
 
+defineProps({
+    titulo: String
+})
+const profile = ref(null)
+const notifys = [{ title: 'XXX, te mandou uma menssagem', icon: 'mdi-clock-outline' },
+        { title: 'Sua Solicitação n XXX foi aprovada', icon: 'mdi-profile-outline' },]
 
 </script>
-<script>
-
-export default {
-    props: {
-        titulo: String
-    },
-
-    data() {
-        return {
-
-            profile: null,
-            notifys: [
-        { title: 'XXX, te mandou uma menssagem', icon: 'mdi-clock-outline' },
-        { title: 'Sua Solicitação n XXX foi aprovada', icon: 'mdi-profile-outline' },
-        
-      ],
-        }
-    },
 
 
-}
-
-
-</script>

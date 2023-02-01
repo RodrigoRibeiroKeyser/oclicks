@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
 
+
 class UserRequest extends FormRequest
 {
     /**
@@ -27,11 +28,34 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required|min:8',
             'email' => 'required|email|unique:users',
-            'login' => 'required|min:8|unique:users',
-            'plano' => 'required',
+            'login' => 'required|min:8|unique:users|string|max:255',
+            "name" => 'required',
+            "dataContrat" => 'required',
+            "setor" => 'required',
+            "cpf" => 'required|cpf',
+            "rg" => 'required',
+            "ctps" => 'required',
+            "tituloEleitoral" => 'required',
+            "cnh" => 'required',
+            "cerReserv" => 'required',
+            "escolaridade" => 'required',
+            "address" => 'required',
+            "numero" => 'required',
+            "cep" => 'required',
+            "bairro" => 'required',
+            "city" => 'required',
+            "dataAdd" => 'required',
+            "personR" => 'required',
+            "phone" => 'required',
+            "phone2" => 'required',
+            "complemento" => 'required',
+            "selected" => 'required',
+            "escalas" => 'required',
+            "prof" => 'required',
+            "pis" => 'required',
+            'orgEmissor' => 'required',
+            'uf' => 'required',
             'password' => ['required', 'confirmed', Password::
-            min(8)->letters()->mixedCase()->numbers()->symbols()],
-
-        ];
+            min(8)->letters()->mixedCase()->numbers()->symbols()],        ];
     }
 }

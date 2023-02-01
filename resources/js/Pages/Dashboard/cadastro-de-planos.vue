@@ -69,7 +69,12 @@
 
 <script setup>
 
-import { useForm } from '@inertiajs/inertia-vue3';
+import { useForm } from '@inertiajs/vue3'
+import layoutDashboard from '../../Layout/layout-dashboard.vue';
+
+defineOptions({
+    layout: layoutDashboard
+})
 
 console.log()
 
@@ -82,11 +87,6 @@ let form = useForm({
    
     
 });
-
-
-
-
-
 
 let loading = false;
 
@@ -106,18 +106,7 @@ let submit = () => {
 
 
 </script>
-<script>
-import layoutDashaboard from '../../Layout/layout-dashboard.vue'
 
-export default {
-
-    layout: layoutDashaboard,
-
-   
-}
-
-
-</script>
 <style>
 .v-enter-active,
 .v-leave-active {

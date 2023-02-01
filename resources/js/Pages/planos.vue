@@ -211,19 +211,15 @@
   </div>
 </template>
   
-<script>
-import LayoutHome from '../Layout/layout-home.vue'
-import Toggle from '../Shared/toggle-theme.vue'
+<script setup>
+
+import LayoutHome from '../Layout/layout-home.vue';
 
 
 
-export default {
+defineOptions({
   layout: LayoutHome,
-  components: {
-    Toggle
-  }
-  
-}
+})
 </script>
 <style>
 

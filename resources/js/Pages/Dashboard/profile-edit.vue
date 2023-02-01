@@ -358,23 +358,20 @@
 
 
 </template>
-<script>
-import LayoutDashboard from '../../Layout/layout-dashboard.vue';
+<script setup>
+import layoutDashboard from '../../Layout/layout-dashboard.vue';
 
+defineOptions({
+    layout: layoutDashboard
+})
+let empresa = 2;
+let tab = ref()
 
-export default {
-    layout: LayoutDashboard,
-    data: () => ({
-       
-      tab: null,
-    }),
-   
-   async mounted(){
-    this.tab = 'tab-1'
-   }
-}
+onMounted(() => {
+    tab = ref('tab-1')
+})
 
 </script>
 <script setup>
-    let empresa = 2
+    
 </script>

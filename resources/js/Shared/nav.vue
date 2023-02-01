@@ -2,7 +2,7 @@
     <v-navigation-drawer color="primary" permanent class="pa-2">
         <v-list>
             <v-list-item class="pa-md-4 mx-lg-auto text-center">
-                <v-avatar image="../../img/avatar/avatar.jpg" size="large" variant="outlined"></v-avatar>
+                <v-avatar image="@/assets/avatar/avatar.jpg" size="large" variant="outlined"></v-avatar>
                 <v-list-item-title>{{ name }}</v-list-item-title>
 
                 <v-list-item-subtitle>{{ email }}</v-list-item-subtitle>
@@ -66,7 +66,7 @@
     </v-navigation-drawer>
 </template>
 <script>
-import { usePage } from '@inertiajs/inertia-vue3';
+
 
 
 export default {

@@ -1,7 +1,6 @@
 <?php
 
-
-
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\loginController;
@@ -23,24 +22,26 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [homeController::class, 'index'])->name('index');
 Route::get('/planos', [homeController::class, 'planos'])->name('planos');
-Route::get('/login' ,[homeController::class, 'login'])->name('login');
-Route::post('/logindo', [loginController::class, 'authenticate']);//envio do login
-Route::get('/register', [homeController::class, 'register'])->name('register');
-Route::post('/store', [UserController::class, 'store']); //registro de usuario
+Route::get('/login', [homeController::class, 'login'])->name('login');
+Route::post('/logindo', [loginController::class, 'authenticate']); //envio do login
+Route::get('/register', [CompanyController::class, 'create'])->name('register');
+Route::post('/store', [CompanyController::class, 'store']); //registro de usuario
 
 
 
 
-Route::middleware('auth')->prefix('dashboard')->group(function () {    
-//dashboard
-Route::get('/',[DashboardController::class, 'homeDashboard'])->name('DashboardHome');
-Route::get('/user-register', [UserController::class, 'create'])->name('UserRegisterShow');
-Route::post('/create-user', [UserController::class, 'store']); //registro de usuario
-Route::get('/list-users', [UserController::class, 'index'])->name('ListUsers');
-Route::post('/logout', [loginController::class, 'destroy'])->name('logout');
-Route::get('/profile',[DashboardController::class, 'profileEdit'])->name('ProfileEdit');
-//planos no dashboard
-Route::get('/cadastro-de-planos', [PlanosController::class, 'index'])->name('planosRegisterShow');
-Route::post('/create-planos', [PlanosController::class, 'create']);
+Route::middleware(['auth:admin,web'])->prefix('dashboard')->group(function () {
+    //dashboard
+    //login logout
+    Route::get('/', [DashboardController::class, 'homeDashboard'])->name('DashboardHome');
+    Route::post('/logout', [loginController::class, 'destroy'])->name('logout');
+    //rotas de users
+    Route::get('/user-register', [UserController::class, 'create'])->name('UserRegisterShow');
+    Route::post('/create-user', [UserController::class, 'store']); //registro de usuario
+    Route::get('/list-users', [UserController::class, 'index'])->name('ListUsers');
+    Route::get('/profile', [DashboardController::class, 'profileEdit'])->name('ProfileEdit');
+    //planos no dashboard
+    Route::get('/cadastro-de-planos', [PlanosController::class, 'index'])->name('planosRegisterShow');
+    Route::post('/create-planos', [PlanosController::class, 'create']);
 });
 

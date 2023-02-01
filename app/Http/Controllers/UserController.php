@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Http\Requests\UserRequest;
+use App\Models\Doc_user;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use function Termwind\render;
+
 use Inertia\Inertia;
 
 class UserController extends Controller
@@ -20,16 +22,15 @@ class UserController extends Controller
      */
     public function index()
     {
-        /**Veriricar se é master e retornar todos os usuários 
-         * em testes sempre deixo master com login "oclicksltda"
-         * 
-        */
-        if (Auth::user()->login == 'oclicksltda') {
+
+        /**retorna somente usuários cadastrados pelo cliente (tipo 1) e match com seu id */
+        if (User::all()->where('created_by', Auth::id())) {
             return Inertia::render(
                 'Dashboard/list-users',
                 [
+
                     'titulo' => 'Gerenciar Usuários',
-                    'users' => User::all()->map(fn ($user) => [
+                    'users' => User::all()->where('created_by', Auth::id())->map(fn ($user) => [
                         'id' => $user->id,
                         'name' => $user->name,
                         'login' => $user->login,
@@ -38,32 +39,23 @@ class UserController extends Controller
                         'created_by' => $user->created_by,
                         'created_at_year' => $user->created_at->format('d/m/Y'),
                         'created_at_hours' => $user->created_at->format('H:m'),
+
                     ])
+
                 ]
             );
         } else {
-        /**retorna somente usuários cadastrados pelo cliente (tipo 1) e match com seu id */    
             return Inertia::render(
                 'Dashboard/list-users',
                 [
 
                     'titulo' => 'Gerenciar Usuários',
-                    'users' => User::all()->except(Auth::id())->where('created_by', Auth::id())->map(fn ($user) => [
-                        'id' => $user->id,
-                        'name' => $user->name,
-                        'login' => $user->login,
-                        'email' => $user->email,
-                        'tipo' => $user->tipo,
-                        'created_by' => $user->created_by,
-                        'created_at_year' => $user->created_at->format('d/m/Y'),
-                        'created_at_hours' => $user->created_at->format('H:m'),
-
-                    ])
-
+                    'users' => null
                 ]
             );
         }
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -85,24 +77,55 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-
-        /**verificar se o cadastro está sendo feito pelo formulario web ou pelo portal
-         * insere em (created_by) 'web', vindo da form, se for pelo web 
-         * insere id em (created_by) se for criado pelo portal
+        /**
+         * insere id em (created_by) 
          */
         if (Auth::check()) {
-            $user =  Auth::id();
-            $request->merge(['created_by' => $user]);
-            $data = $request->all();
+            
+            $user = User::create([
+                'name' => $request->name,
+                'password' => $request->password,
+                'email' => $request->email,
+                'login' => $request->login,
+                'tipo' =>$request->tipo,    
+                'created_by' => Auth::id(),
+            ]);
+            $user->docUser()->create([
+                'dataContrat' => $request->dataContrat,
+                'setor' => $request->setor,
+                'cpf' => $request->cpf,
+                'rg' => $request->rg,
+                'ctps' => $request->ctps,
+                'tituloEleitoral' => $request->tituloEleitoral,
+                'cnh' => $request->cnh,
+                'cerReserv' => $request->cerReserv,
+                'escolaridade' => $request->escolaridade,
+                'address' => $request->address,
+                'numero' => $request->numero,
+                'cep' => $request->cep,
+                'bairro' => $request->bairro,
+                'city' => $request->city,
+                'uf' => $request->uf,
+                'orgEmissor' => $request->orgEmissor,
+                'dataAdd' => $request->dataAdd,
+                'personR' => $request->personR,
+                'phone' => $request->phone,
+                'phone2' => $request->phone2,
+                'complemento' => $request->complemento,
+                'selected' => $request->selected,
+                'escalas' => $request->escalas,
+                'prof' => $request->prof,
+                'pis' => $request->pis,
+                'pis' => $request->setor,
 
-            User::create($data);
-            return redirect('ListUsers');
-        } else {
-            $data = $request->all();
-            User::create($data);
-            return redirect('dashboard');
-        }
+            ]);
+            
+        }else{
+            return with('message','erro no sistema'); 
+        };
     }
+
+
 
     /**
      * Display the specified resource.

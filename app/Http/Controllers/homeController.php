@@ -18,9 +18,6 @@ class homeController extends Controller
   public function login(){
     return Inertia::render('login');
   }
-  public function register(){
-    return Inertia::render('register');
-  }
  
   
  

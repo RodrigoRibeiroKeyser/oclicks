@@ -21,22 +21,26 @@ class loginController extends Controller
             'login' => ['required', 'min:8'],
             'password' => ['required'],
         ]);
-       
         if (
-            
-            Auth::attempt([
+            Auth::guard('web')->attempt([
                 'login' => $request->login, 
                 'password' => $request->password])                  
                 )  {
             return 
             Redirect::route('DashboardHome');
         } 
-        
+        if(Auth::guard('admin')->attempt([
+            'login' => $request->login, 
+            'password' => $request->password])                  
+            )  {
+        return 
+        Redirect::route('DashboardHome');}
+        else{
 
         return back()->withErrors([
             'user' => 'Usuário ou senha incorretos!',
         ])->onlyInput('user');
-    }
+    }}
 
     /**
      * Log the user out of the application.

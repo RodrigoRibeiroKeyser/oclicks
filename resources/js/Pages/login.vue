@@ -25,7 +25,7 @@
 
                                     </v-text-field>
                                     <p class="text-right text-caption align-center">
-                                        <Link herf="#" class="text-decoration-none ">
+                                        <Link :href="route('register')" class="text-decoration-none ">
                                         Esqueci minha senha
                                         </Link>
                                     </p>
@@ -77,25 +77,18 @@
     </div>
 </template>
 
-<script>
-import LayoutHomeVue from '../Layout/layout-home.vue'
-import { useForm } from '@inertiajs/inertia-vue3'
 
-
-export default {
-    layout: LayoutHomeVue,
-    data() {
-        return {
-
-        }
-    }
-
-}
-
-
-</script>
 <script setup>
-import { useForm } from '@inertiajs/inertia-vue3';
+
+import { useForm } from '@inertiajs/vue3'
+
+import LayoutHome from '../Layout/layout-home.vue';
+
+
+
+defineOptions({
+  layout: LayoutHome,
+})
 
 let form = useForm({
     login: '',

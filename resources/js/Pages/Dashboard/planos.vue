@@ -3,14 +3,12 @@
 </template>
 <script setup>
 
+import layoutDashboard from '../../Layout/layout-dashboard.vue';
+
+defineOptions({
+    layout: layoutDashboard
+})
+
 
 </script>
-<script>
-import layoutDashaboard from '../../Layout/layout-dashboard.vue'
 
-export default {
-
-    layout: layoutDashaboard
-
-}
-</script>

@@ -57,30 +57,22 @@
     </v-main>
 </template>
 
-<script>
-import layoutHomeVue from '../Layout/layout-home.vue';
 
-export default {
-    layout: layoutHomeVue,
-
-    data() {
-        return {
-            show: false,
-
-        }
-    }
-}
-
-</script>
 <script setup>
-import { useForm } from '@inertiajs/inertia-vue3';
+import { useForm } from '@inertiajs/vue3'
+import LayoutHome from '../Layout/layout-home.vue';
+
+defineOptions({
+  layout: LayoutHome,
+})
+
+const show = ref(false)
 
 let form = useForm({
     name: '',
     email: '',
     login: '',
     password: '',
-    tipo: '1',
     created_by: 'web',
     plano: null,
     password_confirmation: '',

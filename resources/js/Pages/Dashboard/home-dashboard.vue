@@ -36,21 +36,13 @@
 
 </template>
 
-<script>
-import layoutDashaboard from '../../Layout/layout-dashboard.vue'
+<script setup>
+import layoutDashboard from '../../Layout/layout-dashboard.vue';
 
-
-export default {
-
-  layout: layoutDashaboard,
-
-
-
-  data() {
-    return {
-
-
-      items: [
+defineOptions({
+    layout: layoutDashboard
+})
+const items = ref([
         {
           id: 1,
           color: 'info',
@@ -68,13 +60,6 @@ export default {
           color: 'success',
           icon: 'mdi-alert-circle',
           text: "o final de seu epediente é as 16:00 "
-        },
-      ],
-      tab: null
-
-    }
-  },
-
-
-}
+        }])
+const tab = ref(null)  
 </script>

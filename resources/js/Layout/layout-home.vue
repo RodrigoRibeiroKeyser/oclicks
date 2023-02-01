@@ -164,27 +164,14 @@
   </main>
 </template>
   
-<script>
-import { Link } from '@inertiajs/inertia-vue3'
+<script setup>
 import Termo from '../Pages/termos-de-uso.vue'
 import Toggle from '../Shared/toggle-theme.vue'
 
-export default {
-  components: {
-    Link,
-    Termo,
-    Toggle
-  },
-  data() {
+const drawer = ref(false)
+const cookies = ref(false)
+const termo = ref(false)
+</script>
+<script>
 
-    return {
-      drawer: false,
-      cookies: false,
-      termo: false,
-
-
-
-    }
-  },
-}
 </script>
