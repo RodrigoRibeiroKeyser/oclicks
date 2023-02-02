@@ -90,7 +90,7 @@ let app = createInertiaApp({
 	progress: {
 		color: 'red',
 		includeCSS: true,
-		showSpinner: false,
+		showSpinner: true,
 
 	},
 	resolve: name => {
