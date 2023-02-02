@@ -221,6 +221,3 @@ defineOptions({
   layout: LayoutHome,
 })
 </script>
-<style>
-
-</style>
