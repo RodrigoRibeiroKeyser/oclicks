@@ -14,9 +14,9 @@
 
                                     <v-sheet class="d-flex">
                                         <v-avatar color="surface-variant" size="large" class="mt-2 mr-5"></v-avatar>
-                                        <v-file-input variant="outlined" 
-                                            accept="image/png, image/jpeg, image/bmp" placeholder="Pick an avatar"
-                                            prepend-icon="mdi-camera-outline" label="Avatar"></v-file-input>
+                                        <v-file-input variant="outlined" accept="image/png, image/jpeg, image/bmp"
+                                             prepend-icon="mdi-camera-outline"
+                                            label="Avatar (Opcional)"></v-file-input>
                                     </v-sheet>
                                     <v-text-field variant="outlined" prepend-icon="md:login" type="text"
                                         v-model="form.login" label="login" color="primary"
@@ -105,7 +105,7 @@
                                 </v-col>
                                 <v-col>
                                     <v-text-field variant="outlined" prepend-icon="mdi-badge-account-horizontal-outline"
-                                        label="Carteira Nacional de Habilitação" v-mask="'000000000-0'"
+                                        label="Carteira Nacional de Habilitação (Opcional)" v-mask="'000000000-0'"
                                         v-model="form.cnh" :messages="[form.errors.cnh]"
                                         :class="[form.errors.cnh ? 'onerror' : '']"
                                         @click="form.errors.cnh = null"></v-text-field>
@@ -182,7 +182,7 @@
                             <v-row>
                                 <v-col>
                                     <v-text-field variant="outlined" prepend-icon="mdi-fountain-pen-tip"
-                                        label="Complemento" v-model="form.complemento"
+                                        label="Complemento (opcional)" v-model="form.complemento"
                                         :messages="[form.errors.complemento]"
                                         :class="[form.errors.complemento ? 'onerror' : '']"
                                         @click="form.errors.complemento = null"></v-text-field>
@@ -196,7 +196,7 @@
                             <v-row>
                                 <v-col>
                                     <v-text-field variant="outlined" prepend-icon="mdi-human-greeting-proximity"
-                                        label="Pessoa Responsável" v-model="form.personR"
+                                        label="Pessoa Responsável (Opcional)" v-model="form.personR"
                                         :messages="[form.errors.personR]"
                                         :class="[form.errors.personR ? 'onerror' : '']"
                                         @click="form.errors.personR = null"></v-text-field>
@@ -219,7 +219,7 @@
                             <v-row>
                                 <v-col>
                                     <v-textarea variant="outlined" prepend-icon="mdi-pencil-plus-outline"
-                                        label="Dados adicionais" v-model="form.dataAdd"
+                                        label="Dados adicionais (Opcional)" v-model="form.dataAdd"
                                         :messages="[form.errors.dataAdd]"
                                         :class="[form.errors.dataAdd ? 'onerror' : '']"
                                         @click="form.errors.dataAdd = null"></v-textarea>
@@ -260,7 +260,7 @@
                                         <v-dialog v-model="dialog">
                                             <template v-slot:activator="{ props }">
                                                 <v-icon icon="mdi-help-circle-outline" v-bind="props">
-                                                    
+
                                                 </v-icon>
                                             </template>
 
@@ -276,7 +276,7 @@
                                         </v-dialog>
                                     </div>
 
-                                  
+
                                 </v-col>
                             </v-row>
                             <v-row>
@@ -302,6 +302,15 @@
                                         :class="[form.errors.prof ? 'onerror' : '']"
                                         @click="form.errors.prof = null"></v-text-field>
                                 </v-col>
+                                <v-col>
+                                    <v-select v-model="form.level" label="Nivel de sistema" variant="outlined"
+                                        :items="level" item-title="title" item-value="title"
+                                        :messages="[form.errors.level]" :class="[form.errors.level ? 'onerror' : '']"
+                                        @click="form.errors.level = null">
+
+                                    </v-select>
+                                    {{ level.abbr }}
+                                </v-col>
 
                             </v-row>
 
@@ -322,7 +331,26 @@
                         :loading="loading">Enviar</v-btn>
                 </v-card-actions>
             </v-card>
+
+
+
         </v-form>
+
+        <div>
+            
+            <v-snackbar as="v-alert" v-model="form.snackbarSuccess" variant="text" :timeout="timeout">
+
+                <v-alert type="success" @click="form.snackbarSuccess = false">Usuário Criado com sucesso! </v-alert>
+
+            </v-snackbar>
+
+            <v-snackbar as="v-alert" v-model="form.snackbarFail" variant="text" :timeout="timeout">
+
+                <v-alert type="error" @click="form.snackbarFail=false"> Erro, volte e verifique os dados do formulário</v-alert>
+
+            </v-snackbar>
+
+        </div>
 
     </v-container>
 
@@ -336,6 +364,8 @@
 import { useForm } from '@inertiajs/vue3'
 import Help from './help.vue';
 import layoutDashboard from '../../Layout/layout-dashboard.vue';
+
+
 
 defineOptions({
     layout: layoutDashboard
@@ -352,7 +382,7 @@ let form = useForm({
     tituloEleitoral: '',
     cnh: '',
     cerReserv: '',
-    escolaridade: '',
+    escolaridade: null,
     address: '',
     numero: '',
     cep: '',
@@ -374,60 +404,74 @@ let form = useForm({
     email: '',
     login: '',
     plano: 'usuario',
-    tipo: '2',
+    level: null,
     created_by: '',
 
     password: '',
     password_confirmation: '',
 
+    snackbarFail: ref(false),
+    snackbarSuccess: ref(false),
+
     errors: { type: Object, default: ({}) }
 })
+
+const timeout = 2000
+
 
 let loading = false;
 
 let submit = () => {
-
     loading = true,
+        
         form.post('create-user', {
-
-            onError: () => (form.password = '', form.password_confirmation = '', loading = false),
-            onSuccess: () => (form.password = '', form.password_confirmation = '', loading = false)
+            
+            onError: () => (form.password = '', form.password_confirmation = '', loading = false, form.snackbarFail = true ),
+            onSuccess: () => (form.password = '', form.password_confirmation = '', loading = false, form.snackbarSuccess = true)
 
         })
 
 }
 let selected = ref(null)
 const items = ref([
-                { title: "Contrato por tempo indeterminado", abbr: 'Contrato por tempo indeterminado' },
-                { title: 'Contrato por tempo determinado ', abbr: 'Contrato por tempo determinado' },
-                { title: 'Contrato de trabalho temporário', abbr: 'Contrato de trabalho temporário' },
-                { title: 'Contrato de trabalho autônomo', abbr: 'Contrato de trabalho autônomo' },
-                { title: 'Contrato de prestação de serviços', abbr: 'Contrato de prestação de serviços' },
-                { title: 'Contrato de trabalho terceirizado', abbr: 'Contrato de trabalho terceirizado' },
-                { title: 'Contrato de trabalho intermitente', abbr: 'Contrato de trabalho intermitente' },
-                { title: 'Contrato de trabalho parcial', abbr: 'Contrato de trabalho parcial' },
-                { title: 'Contrato de trabalho home office', abbr: 'Contrato de trabalho home office' },
-                { title: 'Contrato de trabalho de estágio', abbr: 'Contrato de trabalho de estágio' },
-                { title: 'Contrato de trabalho Verde e Amarelo', abbr: 'Contrato de trabalho Verde e Amarelo' }
-            ])
+    { title: "Contrato por tempo indeterminado", abbr: 'Contrato por tempo indeterminado' },
+    { title: 'Contrato por tempo determinado ', abbr: 'Contrato por tempo determinado' },
+    { title: 'Contrato de trabalho temporário', abbr: 'Contrato de trabalho temporário' },
+    { title: 'Contrato de trabalho autônomo', abbr: 'Contrato de trabalho autônomo' },
+    { title: 'Contrato de prestação de serviços', abbr: 'Contrato de prestação de serviços' },
+    { title: 'Contrato de trabalho terceirizado', abbr: 'Contrato de trabalho terceirizado' },
+    { title: 'Contrato de trabalho intermitente', abbr: 'Contrato de trabalho intermitente' },
+    { title: 'Contrato de trabalho parcial', abbr: 'Contrato de trabalho parcial' },
+    { title: 'Contrato de trabalho home office', abbr: 'Contrato de trabalho home office' },
+    { title: 'Contrato de trabalho de estágio', abbr: 'Contrato de trabalho de estágio' },
+    { title: 'Contrato de trabalho Verde e Amarelo', abbr: 'Contrato de trabalho Verde e Amarelo' }
+])
 const dialog = ref(false)
 const escalas = ref(null)
 const escala = ref([
-                { title: '5x1', abbr: '5x1' },
-                { title: '5x2', abbr: '5x2' },
-                { title: '4x2', abbr: '4x2' },
-                { title: '13x36', abbr: '12x36' },
-                { title: '18x36', abbr: '18x36' },
-                { title: '24x48', abbr: '24x48' },
-            ])
+    { title: '5x1', abbr: '5x1' },
+    { title: '5x2', abbr: '5x2' },
+    { title: '4x2', abbr: '4x2' },
+    { title: '13x36', abbr: '12x36' },
+    { title: '18x36', abbr: '18x36' },
+    { title: '24x48', abbr: '24x48' },
+])
+
+const level = ref([
+    { title: 'Colaborador', abbr: 'Registro e acesso ao sistema' },
+    { title: 'Supervisor', abbr: 'Registro e acesso ao sistema, atende aos chamados de colaboradores' },
+    { title: 'Coordenador', abbr: 'Registro e acesso ao sistema, atende aos chamados de Supervisores' },
+    { title: 'Gerente', abbr: 'Registro e acesso ao sistema, atende aos chamados de Coordenadores' },
+    { title: 'Cargo de RH', abbr: 'Registro e acesso ao sistema, atende a todos os chamados e pode registrar novos usuários' },
+])
 
 const currentTitle = computed(() => {
-            switch (step) {
-                case 1: return 'Dados cadastrais'
-                case 2: return 'Contato e endereço'
-                default: return 'Configurações'
-            }
-        })
+    switch (step) {
+        case 1: return 'Dados cadastrais'
+        case 2: return 'Contato e endereço'
+        default: return 'Configurações'
+    }
+})
 let step = ref()
 onMounted(() => {
     step = ref(1)

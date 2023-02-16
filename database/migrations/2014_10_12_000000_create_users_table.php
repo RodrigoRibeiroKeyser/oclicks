@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('login')->unique();
             $table->string('email')->unique();
-            $table->string('tipo')->default('Colaborador');
+            $table->string('level')->default('Colaborador');
             $table->string('created_by');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');            

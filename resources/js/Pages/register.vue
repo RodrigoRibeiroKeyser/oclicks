@@ -22,7 +22,7 @@
                     :messages="[form.errors.password]" :class="[form.errors.password ? 'onerror' : '']"
                     @focus="form.errors.password = null"></v-text-field>
                 <v-text-field id="password_confirmation" v-model="form.password_confirmation"
-                    :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'" :type="show ? 'text' : 'password'"
+                    :type="show ? 'text' : 'password'"
                     label="Confirmação de Senha" variant="outlined" :messages="[form.errors.password_confirmation]"
                     :class="[form.errors.password ? 'onerror' : '']"
                     @focus="form.errors.password_confirmation = null"></v-text-field>

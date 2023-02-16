@@ -24,11 +24,12 @@ class UserController extends Controller
     {
 
         /**retorna somente usuários cadastrados pelo cliente (tipo 1) e match com seu id */
-        if (User::all()->where('created_by', Auth::id())) {
+        $userlog = User::all()->where('created_by','=' , Auth::id());
+        $userfill = $userlog->toArray();
+        if ($userfill != null ) {
             return Inertia::render(
                 'Dashboard/list-users',
                 [
-
                     'titulo' => 'Gerenciar Usuários',
                     'users' => User::all()->where('created_by', Auth::id())->map(fn ($user) => [
                         'id' => $user->id,
@@ -48,7 +49,6 @@ class UserController extends Controller
             return Inertia::render(
                 'Dashboard/list-users',
                 [
-
                     'titulo' => 'Gerenciar Usuários',
                     'users' => null
                 ]
@@ -65,7 +65,6 @@ class UserController extends Controller
     public function create()
 
     {
-
         return Inertia::render('Dashboard/users-register', ['titulo' => 'Registrar Usuários']);
     }
 
@@ -87,7 +86,7 @@ class UserController extends Controller
                 'password' => $request->password,
                 'email' => $request->email,
                 'login' => $request->login,
-                'tipo' =>$request->tipo,    
+                'level' =>$request->level,    
                 'created_by' => Auth::id(),
             ]);
             $user->docUser()->create([
@@ -121,7 +120,7 @@ class UserController extends Controller
             ]);
             
         }else{
-            return with('message','erro no sistema'); 
+            dd('message','erro no sistema'); 
         };
     }
 

@@ -2,8 +2,8 @@
 
   <Head title="Lista de usuários"></Head>
   
-  <div v-if="users !=null ">
-    {{ users }}
+  <div v-if="users !=array ">
+    
     <v-tabs v-model="tab" fixed-tabs>
       <v-tab value="CargoRH">Cargo RH</v-tab>
       <v-tab value="Colaboradores">Colaboradores</v-tab>
@@ -164,7 +164,7 @@ defineOptions({
 })
 const tab = ref(null)
 defineProps({
-  users: Object, 
+  users: Object,
 });
 
 
